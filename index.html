@@ -3,31 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MagicFridge — Your fridge, finally smart.</title>
-<meta name="description" content="MagicFridge auto-scans Gmail receipts, tracks expiry dates, suggests AI recipes and orders what's missing. Join the beta now.">
+<title>MagicFridge — Your smart fridge manager</title>
+<meta name="description" content="MagicFridge auto-scans Gmail receipts, tracks expiry dates, suggests AI recipes and orders what's missing. Free to download on Android.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;600;700&family=Space+Mono:wght@700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --sky:#B8D4E8;--sky-l:#D6E9F5;--sky-d:#8AB4D0;
-  --white:#fff;--ink:#1A2E3B;--muted:#6B8A9A;
-  --green:#2DC653;--accent:#4A9FC8;--border:#D0E4F0;
-}
+:root{--sky:#B8D4E8;--sky-l:#D6E9F5;--sky-d:#8AB4D0;--white:#fff;--ink:#1A2E3B;--muted:#6B8A9A;--green:#2DC653;--accent:#4A9FC8;--border:#D0E4F0;}
 html{scroll-behavior:smooth}
 body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--ink);overflow-x:hidden}
-
-/* CURSOR GLOW */
 #cursor-glow{position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(74,159,200,.18) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:9999;transition:left .08s linear,top .08s linear;mix-blend-mode:multiply}
-
-/* SCROLL REVEAL */
 .sr{opacity:0;transform:translateY(50px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
-.sr.left{transform:translateX(-50px)}.sr.right{transform:translateX(50px)}.sr.scale{transform:scale(.88)}.sr.rot{transform:rotate(-4deg) scale(.95)}
+.sr.left{transform:translateX(-50px)}.sr.right{transform:translateX(50px)}.sr.scale{transform:scale(.88)}
 .sr.vis{opacity:1!important;transform:none!important}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
-
-/* NAV */
-.nav-wrap{position:sticky;top:0;z-index:200;background:rgba(214,233,245,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-.nav{max-width:680px;margin:0 auto;padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.nav-wrap{position:sticky;top:0;z-index:200;background:rgba(214,233,245,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav{max-width:780px;margin:0 auto;padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{display:flex;align-items:center;gap:8px}
 .logo-box{width:28px;height:28px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center}
 .nav-name{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--ink)}
@@ -35,15 +25,11 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
 .nav-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,46,59,.25)}
 .live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 1.8s infinite;display:inline-block}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
-
-/* HERO */
-.hero{position:relative;overflow:hidden;min-height:540px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.25rem 2rem;text-align:center;max-width:680px;margin:0 auto}
+.hero{position:relative;overflow:hidden;min-height:540px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.25rem 2rem;text-align:center;max-width:780px;margin:0 auto}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .hero-content{position:relative;z-index:2}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.7);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.07em;margin-bottom:1.25rem;backdrop-filter:blur(8px)}
 .hero-h1{font-family:'DM Serif Display',serif;font-size:62px;font-weight:400;line-height:.95;letter-spacing:-2px;color:var(--ink);margin-bottom:1rem;min-height:180px}
-.typed-cursor{display:inline-block;width:3px;height:.9em;background:var(--accent);margin-left:2px;vertical-align:middle;animation:cur .7s infinite}
-@keyframes cur{0%,100%{opacity:1}50%{opacity:0}}
 .hero-sub{font-size:14px;color:var(--muted);line-height:1.7;max-width:360px;margin:0 auto 1.75rem}
 .hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
 .btn-main{background:var(--ink);color:#fff;font-size:13px;font-weight:700;padding:13px 26px;border-radius:50px;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;text-decoration:none}
@@ -56,16 +42,26 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
 .scroll-hint span{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .scroll-arrow{width:18px;height:18px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);animation:sb .8s ease-in-out infinite alternate}
 @keyframes sb{from{transform:rotate(45deg) translateY(-3px)}to{transform:rotate(45deg) translateY(3px)}}
-
-/* MARQUEE */
 .mq-wrap{background:var(--ink);overflow:hidden;padding:11px 0}
 .mq-track{display:flex;animation:mq 22s linear infinite;white-space:nowrap}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .mq-item{font-family:'DM Serif Display',serif;font-style:italic;font-size:17px;color:rgba(255,255,255,.45);padding:0 22px;flex-shrink:0}
 .mq-sep{color:var(--green);font-size:11px;flex-shrink:0}
+.wrap{max-width:780px;margin:0 auto;padding:0 16px}
+.sh{margin-bottom:1.5rem}
+.sh-eye{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.sh-title{font-family:'DM Serif Display',serif;font-size:36px;color:var(--ink);letter-spacing:-.5px}
+.sh-title em{font-style:italic;color:var(--accent)}
 
-/* WRAP */
-.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+/* SCREENSHOTS */
+.screenshots-sec{padding:2rem 1.25rem}
+.screenshots-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.screenshots-scroll::-webkit-scrollbar{display:none}
+.screenshot-card{flex-shrink:0;width:200px;border-radius:24px;overflow:hidden;border:1px solid var(--border);box-shadow:0 12px 32px rgba(74,159,200,.18);transition:transform .3s,box-shadow .3s;background:#fff}
+.screenshot-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 24px 48px rgba(74,159,200,.28)}
+.screenshot-card img{width:100%;height:360px;object-fit:cover;display:block}
+.screenshot-label{padding:12px 14px;font-size:12px;font-weight:700;color:var(--ink);text-align:center;border-top:1px solid var(--border)}
+.screenshot-desc{padding:0 14px 12px;font-size:11px;color:var(--muted);text-align:center;line-height:1.5}
 
 /* STATS */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:2rem 1.25rem}
@@ -74,17 +70,11 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
 .stat-n{font-family:'DM Serif Display',serif;font-size:44px;color:var(--accent);line-height:1}
 .stat-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
 
-/* SECTION HEADER */
-.sh{margin-bottom:1.5rem}
-.sh-eye{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
-.sh-title{font-family:'DM Serif Display',serif;font-size:36px;color:var(--ink);letter-spacing:-.5px}
-.sh-title em{font-style:italic;color:var(--accent)}
-
 /* FEATURES */
 .feat-sec{padding:0 1.25rem 2rem}
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .fc{background:#fff;border-radius:20px;padding:1.4rem;border:1px solid var(--border);cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,border-color .3s}
-.fc:hover{transform:translateY(-8px) rotateX(4deg) rotateY(-2deg);box-shadow:0 20px 50px rgba(74,159,200,.22);border-color:var(--sky-d)}
+.fc:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(74,159,200,.22);border-color:var(--sky-d)}
 .fc.wide{grid-column:span 2}
 .fc-num{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--muted);margin-bottom:.5rem}
 .fc-icon{font-size:30px;margin-bottom:.5rem;display:inline-block;transition:transform .3s}
@@ -107,6 +97,22 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
 .step h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:.3rem}
 .step p{font-size:12px;color:var(--muted);line-height:1.6;position:relative;z-index:1}
 .step-note{font-size:10px;font-weight:700;color:var(--green);margin-top:.4rem}
+
+/* PRICING */
+.pricing-sec{padding:0 1.25rem 2rem}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1.5rem}
+.plan{background:#fff;border-radius:20px;padding:1.6rem;border:1px solid var(--border)}
+.plan.pro{background:var(--ink);border-color:var(--ink)}
+.plan-name{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.plan.pro .plan-name{color:rgba(255,255,255,.5)}
+.plan-price{font-family:'DM Serif Display',serif;font-size:36px;color:var(--ink);line-height:1}
+.plan.pro .plan-price{color:#7DD4F8}
+.plan-period{font-size:11px;color:var(--muted);margin-bottom:1rem}
+.plan.pro .plan-period{color:rgba(255,255,255,.4)}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:6px}
+.plan-features li{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.plan.pro .plan-features li{color:rgba(255,255,255,.7)}
+.plan-features li::before{content:'✓';color:var(--green);font-weight:700;font-size:11px}
 
 /* FAQ */
 .faq-sec{padding:0 1.25rem 2rem}
@@ -132,10 +138,6 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
 .cta-acts{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px}
 .btn-cta{background:var(--green);color:#fff;font-size:13px;font-weight:700;padding:13px 24px;border-radius:50px;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;white-space:nowrap;transition:transform .2s,box-shadow .2s;text-decoration:none;display:inline-block;text-align:center}
 .btn-cta:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(45,198,83,.4)}
-.btn-cta-o{background:transparent;color:rgba(255,255,255,.6);font-size:12px;padding:11px 20px;border-radius:50px;border:1px solid rgba(255,255,255,.2);cursor:pointer;font-family:'Space Grotesk',sans-serif;white-space:nowrap;transition:border-color .2s,transform .2s;text-decoration:none;display:inline-block;text-align:center}
-.btn-cta-o:hover{border-color:rgba(255,255,255,.6);transform:translateY(-2px)}
-
-/* FOOTER */
 .footer{border-top:1px solid var(--border);padding:1.25rem 1.25rem;display:flex;justify-content:space-between;align-items:center}
 .footer-logo{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 .footer-links{display:flex;gap:16px}
@@ -144,7 +146,6 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
 </style>
 </head>
 <body>
-
 <div id="cursor-glow"></div>
 
 <!-- NAV -->
@@ -156,18 +157,18 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
       </div>
       <span class="nav-name">MagicFridge</span>
     </div>
-    <a class="nav-btn" href="https://play.google.com/apps/testing/com.mycompany.magicfridge" target="_blank">
-      <span class="live-dot"></span>Join Beta
+    <a class="nav-btn" href="https://play.google.com/store/apps/details?id=com.mycompany.magicfridge" target="_blank">
+      <span class="live-dot"></span>Download Free
     </a>
   </nav>
 </div>
 
 <!-- HERO -->
-<div style="max-width:680px;margin:0 auto;overflow:hidden;position:relative">
+<div style="max-width:780px;margin:0 auto;overflow:hidden;position:relative">
 <div class="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-content">
-    <div class="hero-eyebrow sr d1"><span class="live-dot"></span>Beta — Open Now</div>
+    <div class="hero-eyebrow sr d1"><span class="live-dot"></span>Now Available on Android</div>
     <div style="margin-bottom:1rem" class="sr scale d2">
       <svg class="fridge-hero" width="130" height="210" viewBox="0 0 130 210" fill="none">
         <rect x="15" y="8" width="100" height="45" rx="9" fill="white" stroke="#8AB4D0" stroke-width="1.8"/>
@@ -177,23 +178,17 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
         <rect x="17" y="88" width="6" height="42" rx="3" fill="#8AB4D0"/>
         <line x1="27" y1="108" x2="108" y2="108" stroke="#D6E9F5" stroke-width="1.8"/>
         <line x1="27" y1="142" x2="108" y2="142" stroke="#D6E9F5" stroke-width="1.8"/>
-        <g transform="translate(90,175)" opacity=".35">
-          <line x1="0" y1="-9" x2="0" y2="9" stroke="#4A9FC8" stroke-width="1.8"/>
-          <line x1="-9" y1="0" x2="9" y2="0" stroke="#4A9FC8" stroke-width="1.8"/>
-          <line x1="-6" y1="-6" x2="6" y2="6" stroke="#4A9FC8" stroke-width="1.8"/>
-          <line x1="6" y1="-6" x2="-6" y2="6" stroke="#4A9FC8" stroke-width="1.8"/>
-        </g>
         <path d="M108,195 L109.8,191.8 L113,190 L109.8,188.2 L108,185 L106.2,188.2 L103,190 L106.2,191.8 Z" fill="#4A9FC8" opacity=".5"/>
       </svg>
     </div>
     <h1 class="hero-h1 sr d3" id="hero-title"></h1>
-    <p class="hero-sub sr d4">Auto-scans Gmail receipts, tracks expiry dates, suggests recipes and orders what's missing.</p>
+    <p class="hero-sub sr d4">Scan receipts, track expiry dates, get AI recipes and never waste food again.</p>
     <div class="hero-btns sr d5">
-      <a class="btn-main" href="https://play.google.com/apps/testing/com.mycompany.magicfridge" target="_blank">
+      <a class="btn-main" href="https://play.google.com/store/apps/details?id=com.mycompany.magicfridge" target="_blank">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><path d="M3 20.5v-17c0-.83 1-.83 1.5-.5l15 8.5-15 8.5c-.5.33-1.5.33-1.5-.5z"/></svg>
-        Get early access
+        Download on Google Play
       </a>
-      <a class="btn-ghost" href="#mf-feat">See features ↓</a>
+      <a class="btn-ghost" href="#mf-screenshots">See screenshots ↓</a>
     </div>
   </div>
   <div class="scroll-hint"><span>scroll</span><div class="scroll-arrow"></div></div>
@@ -209,21 +204,55 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
     <span class="mq-item">Smart shopping</span><span class="mq-sep"> ✦ </span>
     <span class="mq-item">Gmail sync</span><span class="mq-sep"> ✦ </span>
     <span class="mq-item">Zero food waste</span><span class="mq-sep"> ✦ </span>
+    <span class="mq-item">Budget tracking</span><span class="mq-sep"> ✦ </span>
+    <span class="mq-item">Fridge sharing</span><span class="mq-sep"> ✦ </span>
     <span class="mq-item">Receipt auto-scan</span><span class="mq-sep"> ✦ </span>
     <span class="mq-item">Expiry alerts</span><span class="mq-sep"> ✦ </span>
     <span class="mq-item">AI recipes</span><span class="mq-sep"> ✦ </span>
     <span class="mq-item">Smart shopping</span><span class="mq-sep"> ✦ </span>
     <span class="mq-item">Gmail sync</span><span class="mq-sep"> ✦ </span>
     <span class="mq-item">Zero food waste</span><span class="mq-sep"> ✦ </span>
+    <span class="mq-item">Budget tracking</span><span class="mq-sep"> ✦ </span>
+    <span class="mq-item">Fridge sharing</span><span class="mq-sep"> ✦ </span>
   </div>
 </div>
 
 <div class="wrap">
 
+<!-- SCREENSHOTS -->
+<div class="screenshots-sec" id="mf-screenshots">
+  <div class="sh sr">
+    <div class="sh-eye">App screenshots</div>
+    <div class="sh-title">See it in<br><em>action.</em></div>
+  </div>
+  <div class="screenshots-scroll">
+    <div class="screenshot-card sr d1">
+      <img src="앱4.png" alt="Home Dashboard">
+      <div class="screenshot-label">🏠 Home Dashboard</div>
+      <div class="screenshot-desc">Scan receipts, track budget & food waste monthly</div>
+    </div>
+    <div class="screenshot-card sr d2">
+      <img src="앱3.png" alt="Fridge Manager">
+      <div class="screenshot-label">🧊 Fridge Manager</div>
+      <div class="screenshot-desc">Tap zones to see what's inside. AI recipe button always ready</div>
+    </div>
+    <div class="screenshot-card sr d3">
+      <img src="앱2.png" alt="Smart Shopping">
+      <div class="screenshot-label">🛒 Smart Shopping</div>
+      <div class="screenshot-desc">AI-powered restock recommendations based on history</div>
+    </div>
+    <div class="screenshot-card sr d4">
+      <img src="앱1.png" alt="Settings">
+      <div class="screenshot-label">⚙️ Full Control</div>
+      <div class="screenshot-desc">Gmail sync, fridge sharing, Pro membership & more</div>
+    </div>
+  </div>
+</div>
+
 <!-- STATS -->
 <div class="stats">
   <div class="stat sr left d1"><div class="stat-n" data-target="6" data-suffix="h">0h</div><div class="stat-l">Auto-scan cycle</div></div>
-  <div class="stat sr d2"><div class="stat-n" data-target="10" data-suffix="+">0+</div><div class="stat-l">Stores supported</div></div>
+  <div class="stat sr d2"><div class="stat-n" data-target="7" data-suffix="">0</div><div class="stat-l">Languages</div></div>
   <div class="stat sr right d3"><div class="stat-n" data-target="4" data-suffix="">0</div><div class="stat-l">Countries</div></div>
 </div>
 
@@ -234,10 +263,14 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
     <div class="sh-title">Smart features,<br><em>zero effort.</em></div>
   </div>
   <div class="fg">
-    <div class="fc sr left d1"><div class="fc-num">01</div><div class="fc-icon">📧</div><h3>Receipt auto-scan</h3><p>Pulls grocery items from Gmail orders every 6 hours. Completely hands-free.</p><span class="fc-tag">Automatic</span></div>
-    <div class="fc sr right d2"><div class="fc-num">02</div><div class="fc-icon">🧊</div><h3>Expiry tracking</h3><p>Set dates on items and get notified before things go bad.</p><span class="fc-tag">Smart alerts</span></div>
-    <div class="fc sr left d3"><div class="fc-num">03</div><div class="fc-icon">👨‍🍳</div><h3>AI recipe picks</h3><p>Suggests meals using exactly what you already have. Zero waste.</p><span class="fc-tag">AI powered</span></div>
-    <div class="fc sr right d4"><div class="fc-num">04</div><div class="fc-icon">🛒</div><h3>One-tap restock</h3><p>Missing an ingredient? Order from the right store for your country.</p><span class="fc-tag">Global</span></div>
+    <div class="fc sr left d1"><div class="fc-num">01</div><div class="fc-icon">📧</div><h3>Receipt auto-scan</h3><p>Connects to Gmail and pulls grocery items automatically every 6 hours. No manual entry needed.</p><span class="fc-tag">Automatic</span></div>
+    <div class="fc sr right d2"><div class="fc-num">02</div><div class="fc-icon">🧊</div><h3>Visual fridge manager</h3><p>See your fridge, freezer and pantry at a glance. Tap any zone to check what's inside and adjust quantities.</p><span class="fc-tag">Smart alerts</span></div>
+    <div class="fc sr left d3"><div class="fc-num">03</div><div class="fc-icon">🔥</div><h3>Expiry date tracking</h3><p>Color-coded alerts show what expires soon. Get push notifications before things go bad.</p><span class="fc-tag">Alerts</span></div>
+    <div class="fc sr right d4"><div class="fc-num">04</div><div class="fc-icon">👨‍🍳</div><h3>AI recipe suggestions</h3><p>Gemini AI suggests recipes using exactly what you already have. Cook smarter, waste nothing.</p><span class="fc-tag">AI powered</span></div>
+    <div class="fc sr left d3"><div class="fc-num">05</div><div class="fc-icon">📊</div><h3>Budget & waste tracking</h3><p>Monthly food budget, waste amount and savings dashboard. Compare with last month to improve habits.</p><span class="fc-tag">Analytics</span></div>
+    <div class="fc sr right d4"><div class="fc-num">06</div><div class="fc-icon">🛒</div><h3>Smart shopping list</h3><p>AI recommends what to restock based on your purchase history. Order directly from Coupang or Amazon.</p><span class="fc-tag">AI powered</span></div>
+    <div class="fc sr left d3"><div class="fc-num">07</div><div class="fc-icon">👨‍👩‍👧</div><h3>Family fridge sharing</h3><p>Share your fridge with family members using an invite code. Everyone sees what's inside in real time.</p><span class="fc-tag">Pro</span></div>
+    <div class="fc sr right d4"><div class="fc-num">08</div><div class="fc-icon">🌍</div><h3>7 languages supported</h3><p>Korean, English, Japanese, Chinese, German, French and Spanish. The app auto-detects your language.</p><span class="fc-tag">Global</span></div>
     <div class="fc wide sr d2">
       <div class="inner">
         <div><div class="fc-num">Global reach</div><h3>Works wherever you shop</h3><p>Detects your country and connects to the right store automatically.</p></div>
@@ -255,32 +288,67 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
   </div>
   <div class="steps">
     <div class="step sr left d1" data-n="1"><div class="step-num">01</div><h4>Sign in with Google</h4><p>No form. Just your Google account and you're in instantly.</p></div>
-    <div class="step sr right d2" data-n="2"><div class="step-num">02</div><h4>Connect Gmail</h4><p>Allow access and receipts start scanning automatically.</p><div class="step-note">✓ Totally optional</div></div>
-    <div class="step sr left d3" data-n="3"><div class="step-num">03</div><h4>Review your fridge</h4><p>Check auto-added items, set expiry dates, adjust quantities.</p></div>
-    <div class="step sr right d4" data-n="4"><div class="step-num">04</div><h4>Cook or shop</h4><p>Get a recipe for what you have, or restock in one tap.</p></div>
+    <div class="step sr right d2" data-n="2"><div class="step-num">02</div><h4>Connect Gmail</h4><p>Allow access and receipts start scanning automatically every 6 hours.</p><div class="step-note">✓ Totally optional</div></div>
+    <div class="step sr left d3" data-n="3"><div class="step-num">03</div><h4>Review your fridge</h4><p>Check auto-added items, set expiry dates, adjust quantities with a slider.</p></div>
+    <div class="step sr right d4" data-n="4"><div class="step-num">04</div><h4>Cook or shop</h4><p>Get an AI recipe for what you have, or restock in one tap.</p></div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-sec">
+  <div class="sh sr">
+    <div class="sh-eye">Pricing</div>
+    <div class="sh-title">Simple &<br><em>transparent.</em></div>
+  </div>
+  <div class="pricing-grid">
+    <div class="plan sr left d1">
+      <div class="plan-name">Free</div>
+      <div class="plan-price">$0</div>
+      <div class="plan-period">forever</div>
+      <ul class="plan-features">
+        <li>Receipt scanning</li>
+        <li>Expiry tracking</li>
+        <li>AI recipe suggestions</li>
+        <li>Budget & waste overview</li>
+        <li>Shopping list</li>
+        <li>7 languages</li>
+      </ul>
+    </div>
+    <div class="plan pro sr right d2">
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">$4.99</div>
+      <div class="plan-period">per month · or $29.99/year</div>
+      <ul class="plan-features">
+        <li>Everything in Free</li>
+        <li>Family fridge sharing</li>
+        <li>Unlimited scans</li>
+        <li>Gmail auto-sync</li>
+        <li>Priority support</li>
+      </ul>
+    </div>
   </div>
 </div>
 
 <!-- FAQ -->
 <div class="faq-sec">
   <div class="sh sr"><div class="sh-eye">FAQ</div><div class="sh-title"><em>Questions?</em><br>We got you.</div></div>
-  <div class="fi sr d1"><div class="fq" onclick="tFaq(this)">Is Gmail access required?<span class="fi-icon">+</span></div><div class="fa">Not at all. Add items manually without linking Gmail. Connecting it just makes everything hands-free.</div></div>
-  <div class="fi sr d2"><div class="fq" onclick="tFaq(this)">Which stores are supported?<span class="fi-icon">+</span></div><div class="fa">Coupang, Naver, Emart, Amazon, Rakuten, AliExpress, Shopee and more — growing regularly.</div></div>
-  <div class="fi sr d3"><div class="fq" onclick="tFaq(this)">Is my email data private?<span class="fi-icon">+</span></div><div class="fa">Yes. We only scan for receipt keywords. Raw email is never stored. Everything deleted on account removal.</div></div>
-  <div class="fi sr d4"><div class="fq" onclick="tFaq(this)">iOS version?<span class="fi-icon">+</span></div><div class="fa">Android only for now. iOS is on the roadmap.</div></div>
-  <div class="fi sr d5"><div class="fq" onclick="tFaq(this)">Is it free?<span class="fi-icon">+</span></div><div class="fa">Everything is free during beta. Core features stay free after launch.</div></div>
+  <div class="fi sr d1"><div class="fq" onclick="tFaq(this)">Is Gmail access required?<span class="fi-icon">+</span></div><div class="fa">Not at all. You can add items manually by scanning a receipt photo. Connecting Gmail just makes everything automatic and hands-free.</div></div>
+  <div class="fi sr d2"><div class="fq" onclick="tFaq(this)">Which stores are supported?<span class="fi-icon">+</span></div><div class="fa">Coupang (Korea), Amazon (US/Global), Rakuten (Japan), Taobao (China). More stores are being added regularly.</div></div>
+  <div class="fi sr d3"><div class="fq" onclick="tFaq(this)">Is my email data private?<span class="fi-icon">+</span></div><div class="fa">Yes. We only scan for receipt keywords — your raw email content is never stored or shared. All data is deleted immediately when you remove your account.</div></div>
+  <div class="fi sr d4"><div class="fq" onclick="tFaq(this)">iOS version coming?<span class="fi-icon">+</span></div><div class="fa">Android only for now. iOS is on the roadmap — follow us to stay updated.</div></div>
+  <div class="fi sr d5"><div class="fq" onclick="tFaq(this)">What languages are supported?<span class="fi-icon">+</span></div><div class="fa">Korean, English, Japanese, Chinese, German, French and Spanish. The app detects your device language automatically.</div></div>
+  <div class="fi sr d1"><div class="fq" onclick="tFaq(this)">Can I share the fridge with my family?<span class="fi-icon">+</span></div><div class="fa">Yes! With the Pro plan you can share your fridge with family members using an invite code. Everyone can see and update the inventory in real time.</div></div>
 </div>
 
 <!-- CTA -->
 <div class="cta-sec">
   <div class="cta-card sr scale">
     <div class="cta-text">
-      <h2>Join the beta &<br><em>help us build it.</em></h2>
-      <p>Android · Free · 12 spots remaining</p>
+      <h2>Stop wasting food &<br><em>save money.</em></h2>
+      <p>Android · Free to download · Pro plan available</p>
     </div>
     <div class="cta-acts">
-      <a class="btn-cta" href="https://play.google.com/apps/testing/com.mycompany.magicfridge" target="_blank">Get early access →</a>
-      <a class="btn-cta-o" href="https://groups.google.com/g/magicfridge-testers" target="_blank">Join tester group</a>
+      <a class="btn-cta" href="https://play.google.com/store/apps/details?id=com.mycompany.magicfridge" target="_blank">Download on Google Play →</a>
     </div>
   </div>
 </div>
@@ -288,26 +356,25 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
 <!-- FOOTER -->
 <div class="footer">
   <span class="footer-logo">MagicFridge</span>
-  <div class="footer-links"><a href="#">Privacy</a><a href="mailto:">Contact</a></div>
+  <div class="footer-links">
+    <a href="https://hansangu477-wq.github.io/magicfridge-privacy">Privacy</a>
+    <a href="mailto:hansangu477@gmail.com">Contact</a>
+  </div>
 </div>
 
 </div>
 
 <script>
-/* CURSOR GLOW */
 const glow = document.getElementById('cursor-glow');
 document.addEventListener('mousemove', e => {
   glow.style.left = e.clientX + 'px';
   glow.style.top = e.clientY + 'px';
 });
 
-/* HERO CANVAS */
 const canvas = document.getElementById('hero-canvas');
 const ctx = canvas.getContext('2d');
 let W, H, particles = [], bubbles = [];
-
 function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
-
 class Particle {
   constructor() { this.reset(); }
   reset() {
@@ -318,7 +385,6 @@ class Particle {
     this.c = ['#4A9FC8','#8AB4D0','#2DC653','#B8D4E8'][Math.floor(Math.random()*4)];
   }
 }
-
 class Bubble {
   constructor() { this.reset(true); }
   reset(init) {
@@ -328,12 +394,10 @@ class Bubble {
     this.wobbleSpeed = (Math.random()-.5)*.02;
   }
 }
-
 function init() {
   particles = Array.from({length:70}, () => new Particle());
   bubbles = Array.from({length:12}, () => new Bubble());
 }
-
 function drawFrame() {
   const grad = ctx.createLinearGradient(0,0,0,H);
   grad.addColorStop(0,'#D6E9F5'); grad.addColorStop(1,'#B8D4E8');
@@ -362,11 +426,9 @@ function drawFrame() {
   });
   requestAnimationFrame(drawFrame);
 }
-
 resize(); init(); drawFrame();
 window.addEventListener('resize', ()=>{ resize(); init(); });
 
-/* TYPING */
 const lines = ['Your fridge,','finally','smart.'];
 const colors = [null,'var(--accent)',null];
 let li=0, ci=0;
@@ -387,11 +449,9 @@ function typeNext() {
 }
 setTimeout(typeNext,900);
 
-/* SCROLL REVEAL */
 const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('vis');});},{threshold:.1});
 document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
 
-/* COUNT-UP */
 const numObs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting&&!e.target.dataset.done){
@@ -404,14 +464,12 @@ const numObs = new IntersectionObserver(entries=>{
 },{threshold:.5});
 document.querySelectorAll('[data-target]').forEach(el=>numObs.observe(el));
 
-/* PARALLAX */
 window.addEventListener('scroll',()=>{
   const y=window.scrollY;
   const f=document.querySelector('.fridge-hero');
   if(f) f.style.transform=`translateY(${-y*.03}px)`;
 });
 
-/* FAQ */
 function tFaq(el){
   const open=el.classList.contains('open');
   document.querySelectorAll('.fq').forEach(q=>{q.classList.remove('open');q.nextElementSibling.classList.remove('show');});
