@@ -10,7 +10,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--sky:#B8D4E8;--sky-l:#D6E9F5;--sky-d:#8AB4D0;--white:#fff;--ink:#1A2E3B;--muted:#6B8A9A;--green:#2DC653;--accent:#4A9FC8;--border:#D0E4F0;}
 html{scroll-behavior:smooth}
-body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--ink);overflow-x:hidden}
+body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--ink)}
 #cursor-glow{position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(74,159,200,.18) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:9999;transition:left .08s linear,top .08s linear;mix-blend-mode:multiply}
 .sr{opacity:0;transform:translateY(50px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .sr.left{transform:translateX(-50px)}.sr.right{transform:translateX(50px)}.sr.scale{transform:scale(.88)}
@@ -234,7 +234,7 @@ body{background:var(--sky-l);font-family:'Space Grotesk',sans-serif;color:var(--
     <div class="screenshot-card sr d2">
       <img src="앱3.png" alt="Fridge Manager">
       <div class="screenshot-label">🧊 Fridge Manager</div>
-      <div class="screenshot-desc">Tap zones to see what's inside. AI recipe button always ready</div>
+      <div class="screenshot-desc">Tap fridge zones to manage your food inventory</div>
     </div>
     <div class="screenshot-card sr d3">
       <img src="앱2.png" alt="Smart Shopping">
